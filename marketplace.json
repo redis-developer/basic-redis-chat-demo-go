@@ -15,7 +15,7 @@
       "Google": "https://deploy.cloud.run/?git_repo=https://github.com/redis-developer/basic-redis-chat-app-demo-go.git"
     }
   ],
-  "language": ["JavaScript"],
+  "language": ["Golang"],
   "redis_commands": [
     "AUTH",
     "INCR",
