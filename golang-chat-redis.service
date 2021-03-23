@@ -1,0 +1,20 @@
+[Unit]
+Description=Golang Chat Redis Service
+#After=
+
+[Service]
+User=chat-demo
+Group=chat-demo
+LimitAS=infinity
+LimitRSS=infinity
+LimitCORE=infinity
+LimitNOFILE=65536
+WorkingDirectory=/usr/local/share/chat-demo/
+ExecStart=/usr/local/share/chat-demo/bin
+Restart=always
+RestartSec=5s
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

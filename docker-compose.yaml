@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:5
+    container_name: chat-redis
+    hostname: chat-redis
+    restart: always
+    networks:
+      - chat-demo
+  api:
+    build:
+      context: .
+    image: chat-api
+    container_name: chat-api
+    restart: always
+    depends_on:
+      - redis
+    networks:
+      - chat-demo
+networks:
+  chat-demo:
+    driver: bridge
+
