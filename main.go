@@ -18,6 +18,10 @@ func main() {
 	redisCli := rediscli.NewRedis(cnf.RedisAddress, cnf.RedisPassword)
 	messageController := message.NewController(redisCli)
 	http.Handle("/ws", websocket.Handler(redisCli, messageController))
+	http.HandleFunc("/links", func(writer http.ResponseWriter, request *http.Request) {
+		_,_ = writer.Write([]byte(`{"github":"https://github.com/redis-developer/basic-redis-chat-demo-go"}`))
+	})
 	http.Handle("/", http.FileServer(http.Dir(cnf.ClientLocation)))
 	log.Fatal(http.ListenAndServe(cnf.ServerAddress, nil))
 }
+
