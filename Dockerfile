@@ -1,7 +1,4 @@
-FROM golang:1.16.0-buster as builder
-
-# install git
-RUN apt-get install -y git
+FROM golang as builder
 
 RUN mkdir /build
 
@@ -11,21 +8,24 @@ WORKDIR /build
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o bin .
 
-FROM golang:1.16.0-buster
+FROM golang
+
+ENV PORT=$PORT
+ENV SERVER_ADDRESS=:5000
+ENV CLIENT_LOCATION=/api/public
+ENV REDIS_ADDRESS=:6379
+ENV REDIS_PASSWORD=""
 
 RUN mkdir /api
-RUN addgroup --system dinamicka
-RUN adduser --system --disabled-password --no-create-home --home /api --ingroup dinamicka dinamicka
-RUN chown dinamicka:dinamicka /api
 
-# Switch current root user to transcoder, prevent running service from root
-USER dinamicka
+WORKDIR /build
 
 COPY --from=builder /build/bin /api/
+COPY client/build /api/public
 
 WORKDIR /api
 
-LABEL   Name="Dinamicka Api"
+LABEL   Name="Chat Api"
 
 #Run service
 ENTRYPOINT ["./bin"]

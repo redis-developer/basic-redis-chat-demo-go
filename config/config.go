@@ -24,8 +24,14 @@ type Config struct {
 }
 
 func NewConfig() *Config {
+
+	addr := os.Getenv(envNameServerAddress)
+	if port := os.Getenv("PORT"); port != "" {
+		addr = ":" + port
+	}
+
 	config := &Config{
-		ServerAddress:  os.Getenv(envNameServerAddress),
+		ServerAddress:  addr,
 		ClientLocation: os.Getenv(envNameClientLocation),
 		RedisAddress:   os.Getenv(envNameRedisAddress),
 		RedisPassword:  os.Getenv(envNameRedisPassword),
