@@ -2,9 +2,9 @@
   "name": "Basic Redis Leaderboard Demo Golang",
   "description": "List of top 100 companies",
   "stack": "container",
-  "repository": "https://github.com/redis-developer/basic-redis-leaderboard-demo-go",
+  "repository": "https://github.com/redis-developer/basic-redis-chat-demo-go",
   "logo": "https://redis.io/images/redis-white.png",
-  "keywords": ["golang", "gin", "redis", "leadboard"],
+  "keywords": ["golang", "gin", "redis", "chat"],
   "env": {
     "REDIS_ADDRESS": {
       "description": "Redis server address host:port",
