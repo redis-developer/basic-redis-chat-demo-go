@@ -51,8 +51,6 @@ func (p Controller) ChannelJoin(sessionUUID string,conn net.Conn, op ws.OpCode, 
 		limit = -1
 	}
 
-	log.Println(">>>>>>>>>>>>", channelUUID, messagesLen, offset, limit)
-
 	channelMessages, err := p.r.ChannelMessages(channelUUID, offset, limit)
 	if err != nil {
 		return nil, newError(102, err)

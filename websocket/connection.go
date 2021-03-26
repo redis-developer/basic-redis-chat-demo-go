@@ -32,24 +32,3 @@ func connectionDel(userSessionID string) {
 	delete(connections, userSessionID)
 	connectionsSync.Unlock()
 }
-
-/*
-func connectionSendPublicMessage(message *Message) {
-	connSync.RLock()
-	for i := range connections {
-		wsWrite(connections[i].conn, ws.OpText, message)
-	}
-	connSync.RUnlock()
-}
-
-
-func connectionSendMessage(message *Message, userSessions ...uuid.UUID) {
-	connSync.RLock()
-	for i := range userSessions {
-		if c, ok := connections[userSessions[i]]; ok {
-			wsWrite(c.conn, ws.OpText, message)
-		}
-	}
-	connSync.RUnlock()
-}
-*/
