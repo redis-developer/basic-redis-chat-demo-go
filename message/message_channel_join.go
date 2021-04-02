@@ -26,7 +26,7 @@ func (p Controller) ChannelJoin(sessionUUID string,conn net.Conn, op ws.OpCode, 
 	if errI != nil {
 		log.Println(errI)
 	}
-
+	
 	channelSessionsRemove(sessionUUID)
 	user,err := p.r.UserGet(message.UserUUID)
 	if err != nil {

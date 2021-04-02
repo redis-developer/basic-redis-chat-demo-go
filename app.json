@@ -15,12 +15,10 @@
 	    "required": true
     },
     "CLIENT_LOCATION": {
-      "description": "Public path to frontend",
-      "value": "/api/public"
+      "description": "Public path to frontend, as example: `/api/public`"
     },
     "SERVER_ADDRESS": {
-      "description": "Api public host:port",
-      "value": ":5000"
+      "description": "Api public host:port, as example: `:5000`"
     }
   }
 }
