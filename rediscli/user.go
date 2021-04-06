@@ -309,7 +309,7 @@ func (r *Redis) UserIsOnline(userUUID string) bool {
 }
 
 func (r *Redis) UserSignOut(userUUID string) {
-	keyAccessKey := redisKeyAccessKey(userUUID)
+	keyAccessKey := r.getKeyUserAccessKey(userUUID)
 	r.UserDeleteAccessKey(keyAccessKey)
 	r.UserSetOffline(userUUID)
 }

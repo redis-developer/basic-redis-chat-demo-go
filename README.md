@@ -119,8 +119,18 @@ On first connect to websocket client receive `ready` message:
 }
 ```
 
-User session saved in golang map and available before api restart, we don't want to store it in redis 
-for make session flow easier.   
+**Redis flow**
+
+Key for store user session UUID:
+```
+userSession.123e4567-e89b-12d3-a456-426614174000
+```
+
+Save user session UUID, value is connected time, will expire after 1h:
+```
+SETEX userSession.123e4567-e89b-12d3-a456-426614174000 0000-00-00T00:00:00.000000000Z 3600
+```
+The session expire make sense for old sessions with not clean exit.
 
 ### User sign in
 
@@ -166,7 +176,7 @@ Send system message to all connected users on success:
 
 Key for store user index by user UUID:
 ```
-usersUUIDListIndex:<UserUUID>
+usersUUIDListIndex:123e4567-e89b-12d3-a456-426614174000
 ```
 Read user by UUID from redis KV, on exist will return user index for users list in redis:
 ```
@@ -320,6 +330,10 @@ DEL access_key:123e4567-e89b-12d3-a456-426614174000
 Set user offline:
 ```
 DEL userStatus:123e4567-e89b-12d3-a456-426614174000
+```
+Delete user session:
+```
+DEL userSession.123e4567-e89b-12d3-a456-426614174000
 ```
 ### Join to channel
 

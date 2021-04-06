@@ -1,7 +1,6 @@
 package websocket
 
 import (
-	"github.com/google/uuid"
 	"io"
 	"net"
 	"sync"
@@ -16,19 +15,17 @@ type Connection struct {
 
 var connections = map[string]Connection{}
 
-func connectionAdd(conn net.Conn) string {
-	userSessionID := uuid.NewString()
+func connectionAdd(conn net.Conn, userSessionUUID string) {
 	connectionsSync.Lock()
-	connections[userSessionID] = Connection{
-		userSessionID: userSessionID,
+	connections[userSessionUUID] = Connection{
+		userSessionID: userSessionUUID,
 		conn:          conn,
 	}
 	connectionsSync.Unlock()
-	return userSessionID
 }
 
-func connectionDel(userSessionID string) {
+func connectionDel(userSessionUUID string) {
 	connectionsSync.Lock()
-	delete(connections, userSessionID)
+	delete(connections, userSessionUUID)
 	connectionsSync.Unlock()
 }
