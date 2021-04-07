@@ -65,36 +65,6 @@ As example in a pseudocode:
 
 ![How it works](docs/screenshot000.png)
 
-
-### Initialization
-
-On first connect to websocket client receive `ready` message:
-
-```
-{
-    type: "ready",
-    ready: {
-        sessionUUID: "123e4567-e89b-12d3-a456-426614174000" 
-    }
-}
-```
-
-##### Redis Commands
-
-- Key for store user session UUID: `userSession:123e4567-e89b-12d3-a456-426614174000`
-  - E.g `SETEX userSession.123e4567-e89b-12d3-a456-426614174000 0000-00-00T00:00:00.000000000Z 3600`
-
-###### How the data is stored:
-
-- Read user session created time:
-
-  - E.g `GET userSession.123e4567-e89b-12d3-a456-426614174000`
-
-- Remove user session:
-
-  - E.g `DEL userSession.123e4567-e89b-12d3-a456-426614174000`
-
-
 #### User sign in
 
 Login for chatting, if user not exist it will be created.
@@ -719,6 +689,55 @@ func channelSessionsSendMessage(skipUserUUID, channelUUID string, write Write, m
 			log.Println(err)
 		}
 	}
+}
+```
+
+### Session handling
+
+On first connect to websocket client receive `ready` message:
+
+```
+{
+    type: "ready",
+    ready: {
+        sessionUUID: "123e4567-e89b-12d3-a456-426614174000"
+    }
+}
+```
+
+#### Redis Commands
+
+##### How the data is stored:
+
+- Key for store user session UUID: `userSession:123e4567-e89b-12d3-a456-426614174000`
+
+  - E.g `SETEX userSession.123e4567-e89b-12d3-a456-426614174000 0000-00-00T00:00:00.000000000Z 3600`
+
+- Remove user session:
+
+  - E.g `DEL userSession.123e4567-e89b-12d3-a456-426614174000`
+
+##### How the data is accessed:
+
+- Read user session created time:
+
+  - E.g `GET userSession.123e4567-e89b-12d3-a456-426614174000`
+
+#### Code example: Managing session
+
+```Go
+func (r *Redis) getKeyUserSession(userSessionUUID string) string {
+	return fmt.Sprintf("%s.%s", keyUserSession, userSessionUUID)
+}
+
+func (r *Redis) AddConnection(userSessionUUID string) error {
+	key := r.getKeyUserSession(userSessionUUID)
+	return r.client.Set(key, time.Now().String(), time.Hour).Err()
+}
+
+func (r *Redis) DelConnection(userSessionUUID string) error {
+	key := r.getKeyUserSession(userSessionUUID)
+	return r.client.Del(key).Err()
 }
 ```
 
