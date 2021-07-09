@@ -3,16 +3,16 @@
   "description": "Showcases how to implement chat app in Golang",
   "type": "App",
   "contributed_by": "Redis Labs",
-  "repo_url": "https://github.com/redis-developer/basic-redis-chat-app-demo-go",
-  "download_url": "https://github.com/redis-developer/basic-redis-chat-app-demo-go/archive/main.zip",
+  "repo_url": "https://github.com/redis-developer/basic-redis-chat-demo-go",
+  "download_url": "https://github.com/redis-developer/basic-redis-chat-demo-go/archive/main.zip",
   "hosted_url": "",
   "quick_deploy": "true",
   "deploy_buttons": [
     {
-      "heroku": "https://heroku.com/deploy?template=https://github.com/redis-developer/basic-redis-chat-app-demo-go"
+      "heroku": "https://heroku.com/deploy?template=https://github.com/redis-developer/basic-redis-chat-demo-go"
     },
     {
-      "Google": "https://deploy.cloud.run/?git_repo=https://github.com/redis-developer/basic-redis-chat-app-demo-go.git"
+      "Google": "https://deploy.cloud.run/?git_repo=https://github.com/redis-developer/basic-redis-chat-demo-go.git"
     }
   ],
   "language": ["Go"],
