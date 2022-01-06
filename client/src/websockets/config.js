@@ -1,1 +1,1 @@
-export const webSocketUrl = "ws"+(window.location.protocol.substr(0,5)==="https"?"s":"")+"://"+ process.env.REACT_APP_CHAT_API_HOST +"/ws";
+export const webSocketUrl = "ws"+(window.location.protocol.substr(0,5)==="https"?"s":"")+"://"+ process.env.REACT_APP_CHAT_APP_BACKEND +"/ws";
