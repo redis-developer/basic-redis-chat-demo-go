@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM quay.io/jitesoft/node
 WORKDIR /app
 COPY package.json ./
 COPY package-lock.json ./
