@@ -1,4 +1,4 @@
-#FROM quay.io/jitesoft/node
+FROM quay.io/jitesoft/node
 #FROM openshift/nodejs:latest
 #WORKDIR /app
 #COPY package.json ./
@@ -8,7 +8,7 @@
 #EXPOSE 8080
 #CMD ["npm", "run", "start"]
 
-FROM node:14
+#FROM node:14
 #FROM registry.access.redhat.com/ubi8/nodejs-14
 
 WORKDIR /usr/src/app
