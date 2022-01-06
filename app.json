@@ -12,8 +12,8 @@
       "required": true
     },
     "REDIS_PASSWORD": {
-	    "description": "Redis server password",
-	    "required": true
+	"description": "Redis server password",
+	"required": true
     },
     "CLIENT_LOCATION": {
       "description": "Public path to frontend, as example: `/api/public`"
