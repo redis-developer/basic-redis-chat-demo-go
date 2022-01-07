@@ -1,14 +1,14 @@
 FROM quay.io/jitesoft/node
 #FROM openshift/nodejs:latest
-WORKDIR /app
+WORKDIR /tmp
 COPY package.json ./
 COPY package-lock.json ./
 COPY ./ ./
 #RUN npm ci && npm build && rm -rf node_modules
 RUN npm i
 EXPOSE 8080
-RUN chown -R 1001:0 /app
-USER 1001
+#RUN chown -R 1001:0 /tmp
+#USER 1001
 CMD ["npm", "run", "start"]
 
 #FROM node:14
