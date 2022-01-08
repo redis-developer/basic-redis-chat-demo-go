@@ -6,6 +6,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "dotenv": "^10.0.0",
+    "env-cmd": "^10.1.0",
     "jdenticon": "^3.1.0",
     "moment": "^2.29.1",
     "react": "^17.0.1",
@@ -16,7 +17,7 @@
     "socket.io-client": "^3.0.4"
   },
   "scripts": {
-    "start": "PORT=8080 DANGEROUSLY_DISABLE_HOST_CHECK=true HOST=0.0.0.0 react-scripts start",
+    "start": "PORT=8080 DANGEROUSLY_DISABLE_HOST_CHECK=true HOST=0.0.0.0 env-cmd -f /tmp/.env react-scripts start",
     "build": "react-scripts build"
   },
   "eslintConfig": {
