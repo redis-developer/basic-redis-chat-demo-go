@@ -7,8 +7,9 @@ COPY ./ ./
 #RUN npm ci && npm build && rm -rf node_modules
 RUN npm i
 EXPOSE 8080
-#RUN chown -R 1001:0 /tmp
-#USER 1001
+RUN chown -R 1001:0 /tmp
+USER 1001
+RUN chmod +x /tmp
 CMD ["npm", "run", "start"]
 
 #FROM node:14
