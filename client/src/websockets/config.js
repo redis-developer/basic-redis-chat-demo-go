@@ -7,5 +7,3 @@ console.log("value of REACT_APP_CHAT_BACKEND is : " + process.env.REACT_APP_CHAT
 console.log("value of webSocketUrl is : " + webSocketUrl);
 console.log("value of window.location.protocol is : " + window.location.protocol);
 console.log("value of HTTP_PROXY is : " + HTTP_PROXY);
-console.log("value of CLIENT_LOCATION is : " + CLIENT_LOCATION);
-console.log("value of SERVER_ADDRESS is : " + SERVER_ADDRESS);
