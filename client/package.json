@@ -17,7 +17,7 @@
     "socket.io-client": "^3.0.4"
   },
   "scripts": {
-    "start": "PORT=8080 DANGEROUSLY_DISABLE_HOST_CHECK=true HOST=0.0.0.0 env-cmd -f /tmp/.env react-scripts start",
+    "start": "PORT=8080 DANGEROUSLY_DISABLE_HOST_CHECK=true HOST=0.0.0.0 react-scripts start",
     "build": "react-scripts build"
   },
   "eslintConfig": {
