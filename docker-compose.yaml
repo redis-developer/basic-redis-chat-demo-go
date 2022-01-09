@@ -15,7 +15,7 @@ services:
     image: chat-api
     container_name: chat-api
     ports:
-    - 5000:5000
+    - 5555:5555
     restart: always
     depends_on:
       - redis

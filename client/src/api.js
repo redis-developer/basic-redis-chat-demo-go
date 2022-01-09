@@ -2,7 +2,7 @@ import axios from 'axios';
 import {processSignIn} from "./websockets/process";
 axios.defaults.withCredentials = true;
 
-const BASE_URL = '';
+export const BASE_URL = process.env.REACT_APP_HTTP_PROXY ;
 
 export const MESSAGES_TO_LOAD = 15;
 

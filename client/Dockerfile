@@ -23,7 +23,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 #COPY ./ ./
-COPY build/ ./
+#COPY build/ ./
 #RUN npm i
 
 # so we can cache this layer:

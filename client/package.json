@@ -26,6 +26,7 @@
       "react-app/jest"
     ]
   },
+  "proxy": "http://chat-app-backend-karasing-stage.apps.sandbox.x8i5.p1.openshiftapps.com",
   "browserslist": {
     "production": [
       ">0.2%",
