@@ -1,0 +1,92 @@
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: chat-app-backend
+  labels:
+    app: chat-app-backend
+spec:
+  lookupPolicy:
+    local: false
+---
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: chat-app-backend
+  labels:
+    app: chat-app-backend
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'chat-app-backend:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/ksingh7/basic-redis-chat-demo-go.git'
+    contextDir: client
+  triggers:
+    - type: ConfigChange
+  runPolicy: Serial
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: chat-app-backend-sa
+---
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: chat-app-backend
+  labels:
+    app: chat-app-backend
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - chat-app-backend
+        from:
+          kind: ImageStreamTag
+          name: "chat-app-backend:latest"
+  replicas: 1
+  revisionHistoryLimit: 5
+  test: false
+  selector:
+    app: chat-app-backend
+    deploymentconfig: chat-app-backend
+  template:
+    metadata:
+      labels:
+        app: chat-app-backend
+        deploymentconfig: chat-app-backend
+    spec:
+      containers:
+        - name: chat-app-backend
+          image: chat-app-backend:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          serviceAccountName: chat-app-backend-sa
+          env:
+            - name: REACT_APP_CHAT_APP_BACKEND
+              value: "chat-app-backend:5000"
+          imagePullPolicy: Always
